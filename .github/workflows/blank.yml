@@ -18,6 +18,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: echo '/usr/local/opt/make/libexec/gnubin\n/usr/local/opt/coreutils/libexec/gnubin' >> $GITHUB_PATH && cat $GITHUB_PATH
+    - run: echo '/usr/local/opt/make/libexec/gnubin"
+    - run: echo '/usr/local/opt/coreutils/libexec/gnubin' >> $GITHUB_PATH && cat $GITHUB_PATH
     - run: make test
       env:
         GOENV_NATIVE_EXT: ${{ matrix.goenv_native_ext }}
