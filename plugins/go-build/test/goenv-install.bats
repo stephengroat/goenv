@@ -113,6 +113,7 @@ OUT
 1.12.14
 1.12.15
 1.12.16
+1.12.17
 1.13.0
 1.13beta1
 1.13rc1
@@ -124,8 +125,45 @@ OUT
 1.13.5
 1.13.6
 1.13.7
+1.13.8
+1.13.9
+1.13.10
+1.13.11
+1.13.12
+1.13.13
+1.13.14
+1.13.15
+1.14.0
 1.14beta1
 1.14rc1
+1.14.1
+1.14.2
+1.14.3
+1.14.4
+1.14.5
+1.14.6
+1.14.7
+1.14.8
+1.14.9
+1.14.10
+1.14.11
+1.14.12
+1.14.13
+1.14.14
+1.14.15
+1.15.0
+1.15beta1
+1.15rc2
+1.15.1
+1.15.2
+1.15.3
+1.15.4
+1.15.5
+1.15.6
+1.15.7
+1.15.8
+1.16.0
+1.16beta1
 OUT
 }
 
@@ -466,6 +504,7 @@ Available versions:
   1.12.14
   1.12.15
   1.12.16
+  1.12.17
   1.13.0
   1.13beta1
   1.13rc1
@@ -477,8 +516,45 @@ Available versions:
   1.13.5
   1.13.6
   1.13.7
+  1.13.8
+  1.13.9
+  1.13.10
+  1.13.11
+  1.13.12
+  1.13.13
+  1.13.14
+  1.13.15
+  1.14.0
   1.14beta1
   1.14rc1
+  1.14.1
+  1.14.2
+  1.14.3
+  1.14.4
+  1.14.5
+  1.14.6
+  1.14.7
+  1.14.8
+  1.14.9
+  1.14.10
+  1.14.11
+  1.14.12
+  1.14.13
+  1.14.14
+  1.14.15
+  1.15.0
+  1.15beta1
+  1.15rc2
+  1.15.1
+  1.15.2
+  1.15.3
+  1.15.4
+  1.15.5
+  1.15.6
+  1.15.7
+  1.15.8
+  1.16.0
+  1.16beta1
 OUT
 }
 
@@ -576,6 +652,7 @@ Available versions:
   1.12.14
   1.12.15
   1.12.16
+  1.12.17
   1.13.0
   1.13beta1
   1.13rc1
@@ -587,8 +664,45 @@ Available versions:
   1.13.5
   1.13.6
   1.13.7
+  1.13.8
+  1.13.9
+  1.13.10
+  1.13.11
+  1.13.12
+  1.13.13
+  1.13.14
+  1.13.15
+  1.14.0
   1.14beta1
   1.14rc1
+  1.14.1
+  1.14.2
+  1.14.3
+  1.14.4
+  1.14.5
+  1.14.6
+  1.14.7
+  1.14.8
+  1.14.9
+  1.14.10
+  1.14.11
+  1.14.12
+  1.14.13
+  1.14.14
+  1.14.15
+  1.15.0
+  1.15beta1
+  1.15rc2
+  1.15.1
+  1.15.2
+  1.15.3
+  1.15.4
+  1.15.5
+  1.15.6
+  1.15.7
+  1.15.8
+  1.16.0
+  1.16beta1
 OUT
 }
 
@@ -623,16 +737,40 @@ SH
 
   rm -rf $GOENV_ROOT
 
-  assert_output <<-OUT
+  arch=" "
+  if [ "$(uname -m)" = "aarch64" ]; then
+    arch=" arm "
+  fi
+
+  unameOut="$(uname -s)"
+  case "${unameOut}" in
+      Linux*)
+        assert_output <<-OUT
 before: ${GOENV_ROOT}/versions/1.2.2
 Downloading 1.2.2.tar.gz...
 -> http://localhost:8090/1.2.2/1.2.2.tar.gz
-Installing Go Linux 64bit 1.2.2...
-Installed Go Linux 64bit 1.2.2 to ${GOENV_ROOT}/versions/1.2.2
+Installing Go Linux${arch}64bit 1.2.2...
+Installed Go Linux${arch}64bit 1.2.2 to ${GOENV_ROOT}/versions/1.2.2
 
 after: 0
 REHASHED
 OUT
+;;
+      Darwin*)
+        assert_output <<-OUT
+before: ${GOENV_ROOT}/versions/1.2.2
+Downloading 1.2.2.tar.gz...
+-> http://localhost:8090/1.2.2/1.2.2.tar.gz
+Installing Go Darwin 10.8 64bit 1.2.2...
+Installed Go Darwin 10.8 64bit 1.2.2 to ${GOENV_ROOT}/versions/1.2.2
+
+after: 0
+REHASHED
+OUT
+;;
+      *)          machine="UNKNOWN:${unameOut}"
+  esac
+  echo ${machine}
 
   assert_success
 }
@@ -659,16 +797,40 @@ SH
 
   rm -rf $GOENV_ROOT
 
-  assert_output <<-OUT
+  arch=" "
+  if [ "$(uname -m)" = "aarch64" ]; then
+    arch=" arm "
+  fi
+
+  unameOut="$(uname -s)"
+  case "${unameOut}" in
+      Linux*)
+        assert_output <<-OUT
 before: ${GOENV_ROOT}/versions/1.2.2
 Downloading 1.2.2.tar.gz...
 -> http://localhost:8090/1.2.2/1.2.2.tar.gz
-Installing Go Linux 64bit 1.2.2...
-Installed Go Linux 64bit 1.2.2 to ${GOENV_ROOT}/versions/1.2.2
+Installing Go Linux${arch}64bit 1.2.2...
+Installed Go Linux${arch}64bit 1.2.2 to ${GOENV_ROOT}/versions/1.2.2
 
 after: 0
 REHASHED
 OUT
+;;
+      Darwin*)
+        assert_output <<-OUT
+before: ${GOENV_ROOT}/versions/1.2.2
+Downloading 1.2.2.tar.gz...
+-> http://localhost:8090/1.2.2/1.2.2.tar.gz
+Installing Go Darwin 10.8 64bit 1.2.2...
+Installed Go Darwin 10.8 64bit 1.2.2 to ${GOENV_ROOT}/versions/1.2.2
+
+after: 0
+REHASHED
+OUT
+;;
+      *)          machine="UNKNOWN:${unameOut}"
+  esac
+  echo ${machine}
 
   assert_success
 }
@@ -682,13 +844,35 @@ OUT
 
   run goenv-install -f 1.2.2
 
-  assert_output <<-OUT
+  arch=" "
+  if [ "$(uname -m)" = "aarch64" ]; then
+    arch=" arm "
+  fi
+
+  unameOut="$(uname -s)"
+  case "${unameOut}" in
+      Linux*)
+        assert_output <<-OUT
 Downloading 1.2.2.tar.gz...
 -> http://localhost:8090/1.2.2/1.2.2.tar.gz
-Installing Go Linux 64bit 1.2.2...
-Installed Go Linux 64bit 1.2.2 to ${GOENV_ROOT}/versions/1.2.2
+Installing Go Linux${arch}64bit 1.2.2...
+Installed Go Linux${arch}64bit 1.2.2 to ${GOENV_ROOT}/versions/1.2.2
 
 OUT
+;;
+      Darwin*)
+        assert_output <<-OUT
+Downloading 1.2.2.tar.gz...
+-> http://localhost:8090/1.2.2/1.2.2.tar.gz
+Installing Go Darwin 10.8 64bit 1.2.2...
+Installed Go Darwin 10.8 64bit 1.2.2 to ${GOENV_ROOT}/versions/1.2.2
+
+OUT
+;;
+      *)          machine="UNKNOWN:${unameOut}"
+  esac
+  echo ${machine}
+
   assert_success
 
   assert [ -f "${GOENV_ROOT}/versions/1.2.2/bin/go" ]
@@ -734,14 +918,37 @@ OUT
 
   run goenv-install -f 1.2
 
-  assert_output <<-OUT
+  arch=" "
+  if [ "$(uname -m)" = "aarch64" ]; then
+    arch=" arm "
+  fi
+
+  unameOut="$(uname -s)"
+  case "${unameOut}" in
+      Linux*)
+        assert_output <<-OUT
 Adding patch version 0 to 1.2
 Downloading 1.2.0.tar.gz...
 -> http://localhost:8090/1.2.0/1.2.0.tar.gz
-Installing Go Linux 64bit 1.2.0...
-Installed Go Linux 64bit 1.2.0 to ${GOENV_ROOT}/versions/1.2.0
+Installing Go Linux${arch}64bit 1.2.0...
+Installed Go Linux${arch}64bit 1.2.0 to ${GOENV_ROOT}/versions/1.2.0
 
 OUT
+;;
+      Darwin*)
+        assert_output <<-OUT
+Adding patch version 0 to 1.2
+Downloading 1.2.0.tar.gz...
+-> http://localhost:8090/1.2.0/1.2.0.tar.gz
+Installing Go Darwin 10.8 64bit 1.2.0...
+Installed Go Darwin 10.8 64bit 1.2.0 to ${GOENV_ROOT}/versions/1.2.0
+
+OUT
+;;
+      *)          machine="UNKNOWN:${unameOut}"
+  esac
+  echo ${machine}
+
   assert_success
 
   assert [ -f "${GOENV_ROOT}/versions/1.2.0/bin/go" ]
