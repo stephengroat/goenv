@@ -18,5 +18,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: make test
+      shell: /usr/local/bin/bash --noprofile --norc -eo pipefail {0}
       env:
         GOENV_NATIVE_EXT: ${{ matrix.goenv_native_ext }}
